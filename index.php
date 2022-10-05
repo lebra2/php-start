@@ -9,5 +9,4 @@ while ($row = $stmt->fetch())
 {
     echo '<li><a href="book.php?id=' . $row['id'] . '">' . $row['title'] . '</li>';
 }
-
 echo '</ul>';

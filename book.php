@@ -8,7 +8,8 @@ $stmt = $pdo->prepare('SELECT * FROM books WHERE id = :id');
 $stmt->execute(['id' => $id]);
 $book = $stmt->fetch();
 
-var_dump($book);
+$stmt = $pdo->prepare('SELECT * FROM d107230_leopard.authors LEFT JOIN book_authors ON authors.id=book_authors.author_id WHERE book_authors.book_id = :id');
+$stmt->execute(['id' => $id]);
 
 ?>
 
@@ -22,6 +23,12 @@ var_dump($book);
 </head>
 <body>
     <h1><?=$book['title'];?></h1>
+    <?php
+    while ($author = $stmt->fetch())
+    {
+        echo '<li>' . $author['first_name'] . ' ' . $author['last_name'] . '</li>';
+    }
+    ?>
     <img src="<?= $book['cover_path']?>" alt="">
     <h1>Price: $<?=$book['price'];?></h1>
     <h1><?=$book['release_year'];?></h1>
@@ -30,6 +37,10 @@ var_dump($book);
     <h1>Pages: <?=$book['pages'];?></h1>
     <h1>Language:<?=$book['language'];?></h1>
     <h1>Type:<?=$book['type'];?></h1>
+
+    <div>
+        <span><a href="edit_form.php?id=<?=$id;?>">Muuda</a></span>
+    </div>
     
 </body>
 </html>
