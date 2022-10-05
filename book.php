@@ -40,6 +40,7 @@ $stmt->execute(['id' => $id]);
 
     <div>
         <span><a href="edit_form.php?id=<?=$id;?>">Muuda</a></span>
+        <span><a href="delete_form.php?id=<?=$id;?>">Kustuta</a></span>
     </div>
     
 </body>

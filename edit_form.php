@@ -5,15 +5,21 @@ require_once('connection.php');
 $id = $_GET['id'];
 
 if (isset($_POST['submit'])) {
-    echo "joujou1123";
+
+    $stmt = $pdo->prepare('UPDATE books SET title = :title, stock_saldo = :stock_saldo WHERE id = :id');
+    $stmt->execute(['title' => $_POST['title'], 'stock_saldo' => $_POST['stock_saldo'], 'id' => $id]);
+
+    header('Location: book.php?id=' . $id);
 }
+
+
 
 
 $stmt = $pdo->prepare('SELECT * FROM books WHERE id = :id');
 $stmt->execute(['id' => $id]);
 $book = $stmt->fetch();
 
-var_dump($_POST);
+// var_dump($_POST['title']);
 
 ?>
 
@@ -28,9 +34,13 @@ var_dump($_POST);
     <title>Document</title>
 </head>
 <body>
-    <form action="edit_form.php" method="POST">
+    <form action="edit_form.php?id=<?=$id?>" method="POST">
         <label for="save">Pealkiri:</label><br>
         <input type="text" name="title" value="<?=$book['title'];?>"><br><br>
+
+        <label for="save">Laos:</label><br>
+        <input type="text" name="stock_saldo" value="<?=$book['stock_saldo'];?>"><br><br>
+
         <input type="submit" value="Submit" name="submit">
     </form> 
 </body>
