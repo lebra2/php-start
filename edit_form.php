@@ -31,7 +31,7 @@ $book = $stmt->fetch();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Update Page</title>
 </head>
 <body>
     <form action="edit_form.php?id=<?=$id?>" method="POST">
@@ -41,7 +41,7 @@ $book = $stmt->fetch();
         <label for="save">Laos:</label><br>
         <input type="text" name="stock_saldo" value="<?=$book['stock_saldo'];?>"><br><br>
 
-        <input type="submit" value="Submit" name="submit">
+        <input type="submit" value="Edit" name="submit">
     </form> 
 </body>
 </html>

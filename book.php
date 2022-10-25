@@ -19,6 +19,7 @@ $stmt->execute(['id' => $id]);
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" media="screen">
     <title><?php echo $id ?></title>
 </head>
 <body>
@@ -30,7 +31,7 @@ $stmt->execute(['id' => $id]);
     }
     ?>
     <img src="<?= $book['cover_path']?>" alt="">
-    <h1>Price: $<?=$book['price'];?></h1>
+    <h1 class="price">Price: $<?=$book['price'];?></h1>
     <h1><?=$book['release_year'];?></h1>
     <h1><?=$book['summary'];?></h1>
     <h1>Amount: <?=$book['stock_saldo'];?></h1>
@@ -39,8 +40,15 @@ $stmt->execute(['id' => $id]);
     <h1>Type:<?=$book['type'];?></h1>
 
     <div>
-        <span><a href="edit_form.php?id=<?=$id;?>">Muuda</a></span>
-        <span><a href="delete_form.php?id=<?=$id;?>">Kustuta</a></span>
+        <span><a href="edit_form.php?id=<?=$book['id'];?>">Muuda</a></span>
+        <span><a href="insert.php?">Insert</a></span>
+    
+    
+        <form action="delete.php" method="POST">
+            <input type="hidden" name="id" value="<?=$id?>">
+            <input type="submit" value="Kustuta" name="delete">
+        </form>
+
     </div>
     
 </body>
