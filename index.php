@@ -2,7 +2,17 @@
 
 require_once('connection.php');
 
-$stmt = $pdo->query('SELECT * FROM d107230_leopard.books WHERE is_deleted=0');
+$q = $_GET['q'];
+
+if ( isset($q) && $q) {
+    $stmt = $pdo->prepare('SELECT * FROM books WHERE is_deleted=0 AND title LIKE :q');
+    $stmt->execute(['q' => '%' . $q . '%']);
+    
+} else {
+    $stmt = $pdo->query('SELECT * FROM d107230_leopard.books WHERE is_deleted=0');
+}
+
+
 
 ?>
 
@@ -16,12 +26,13 @@ $stmt = $pdo->query('SELECT * FROM d107230_leopard.books WHERE is_deleted=0');
 </head>
 <body>
 
-    <nav>
+    <nav style="display: flex flex-column">
         <a href="insert.php">Lisa autor</a>
-        <form method="post">
-        <label>Search</label>
-        <input type="text" name="search">
-        <input type="submit" name="submit">
+
+        <form method="get" action="index.php">
+        <label>Otsing</label>
+        <input type="text" name="q">
+        <input type="submit" name="submit" value="Otsi">
             
         </form>
         
