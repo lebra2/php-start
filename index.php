@@ -18,6 +18,14 @@ $stmt = $pdo->query('SELECT * FROM d107230_leopard.books WHERE is_deleted=0');
 
     <nav>
         <a href="insert.php">Lisa autor</a>
+        <form method="post">
+        <label>Search</label>
+        <input type="text" name="search">
+        <input type="submit" name="submit">
+            
+        </form>
+        
+
     </nav>
     <main>
         <ul>
